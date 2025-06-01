@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Resources\StacksRelationManagerResource\RelationManagers\StacksRelationManager;
 use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -33,14 +34,6 @@ class ProjectResource extends Resource
         return 'Проекты';
     }
 
-//title
-//slug
-//description
-//image
-//tech_stack
-//is_featured
-//order
-
     public static function form(Form $form): Form
     {
         return $form
@@ -55,6 +48,7 @@ class ProjectResource extends Resource
                     ->required(),
                 Forms\Components\Textarea::make('description')
                     ->label('Описание')
+                    ->rows(8)
                     ->nullable(),
                 SpatieMediaLibraryFileUpload::make('image')
                     ->nullable()
@@ -64,6 +58,12 @@ class ProjectResource extends Resource
                 Toggle::make('is_featured')
                     ->nullable()
                     ->label('Активный'),
+                Select::make('stacks')
+                    ->label('Стек технологий')
+                    ->multiple()
+                    ->relationship('stacks', 'name')
+                    ->preload()
+                    ->searchable(),
                 Select::make('order')
                     ->label('Порядок отображения')
                     ->options(function () {
@@ -113,7 +113,7 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            StacksRelationManager::class,
         ];
     }
 
