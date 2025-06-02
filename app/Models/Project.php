@@ -85,5 +85,93 @@ class Project extends Model implements HasMedia
         });
     }
 
+    public function getStacks(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->stacks;
+    }
 
+    public function setStacks(\Illuminate\Database\Eloquent\Collection $stacks): void
+    {
+        $this->stacks = $stacks;
+    }
+
+    public function getStacksCount(): ?int
+    {
+        return $this->stacks_count;
+    }
+
+    public function setStacksCount(?int $stacks_count): void
+    {
+        $this->stacks_count = $stacks_count;
+    }
+
+    public function getMediaCount(): ?int
+    {
+        return $this->media_count;
+    }
+
+    public function setMediaCount(?int $media_count): void
+    {
+        $this->media_count = $media_count;
+    }
+
+    public function getMedia(): \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection
+    {
+        return $this->media;
+    }
+
+    public function setMedia(\Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection $media): void
+    {
+        $this->media = $media;
+    }
+
+    public function getOrder(): int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(int $order): void
+    {
+        $this->order = $order;
+    }
+
+    public function getIsFeatured(): int
+    {
+        return $this->is_featured;
+    }
+
+    public function setIsFeatured(int $is_featured): void
+    {
+        $this->is_featured = $is_featured;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
 }

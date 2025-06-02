@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -71,5 +71,45 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getNotifications(): \Illuminate\Notifications\DatabaseNotificationCollection
+    {
+        return $this->notifications;
+    }
+
+    public function setNotifications(\Illuminate\Notifications\DatabaseNotificationCollection $notifications): void
+    {
+        $this->notifications = $notifications;
+    }
+
+    public function getNotificationsCount(): ?int
+    {
+        return $this->notifications_count;
+    }
+
+    public function setNotificationsCount(?int $notifications_count): void
+    {
+        $this->notifications_count = $notifications_count;
     }
 }

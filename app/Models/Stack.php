@@ -8,7 +8,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -42,5 +42,55 @@ class Stack extends Model implements HasMedia
     public function projects(): BelongsToMany
     {
         return $this->belongsToMany(Project::class, 'project_stack');
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getMedia(): \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection
+    {
+        return $this->media;
+    }
+
+    public function setMedia(\Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection $media): void
+    {
+        $this->media = $media;
+    }
+
+    public function getMediaCount(): ?int
+    {
+        return $this->media_count;
+    }
+
+    public function setMediaCount(?int $media_count): void
+    {
+        $this->media_count = $media_count;
+    }
+
+    public function getProjects(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->projects;
+    }
+
+    public function setProjects(\Illuminate\Database\Eloquent\Collection $projects): void
+    {
+        $this->projects = $projects;
+    }
+
+    public function getProjectsCount(): ?int
+    {
+        return $this->projects_count;
+    }
+
+    public function setProjectsCount(?int $projects_count): void
+    {
+        $this->projects_count = $projects_count;
     }
 }
