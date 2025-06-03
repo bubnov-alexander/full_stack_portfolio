@@ -54,16 +54,6 @@ class Stack extends Model implements HasMedia
         $this->name = $name;
     }
 
-    public function getMedia(): \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection
-    {
-        return $this->media;
-    }
-
-    public function setMedia(\Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection $media): void
-    {
-        $this->media = $media;
-    }
-
     public function getMediaCount(): ?int
     {
         return $this->media_count;

@@ -115,16 +115,6 @@ class Project extends Model implements HasMedia
         $this->media_count = $media_count;
     }
 
-    public function getMedia(): \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection
-    {
-        return $this->media;
-    }
-
-    public function setMedia(\Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection $media): void
-    {
-        $this->media = $media;
-    }
-
     public function getOrder(): int
     {
         return $this->order;
