@@ -39,12 +39,17 @@ class Project extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
+    protected $table = 'projects';
+
     protected $fillable = [
         'title',
         'slug',
         'description',
         'tech_stack',
         'is_featured',
+        'finish_project',
+        'github',
+        'preview',
         'order'
     ];
 
@@ -56,33 +61,6 @@ class Project extends Model implements HasMedia
     public function stacks(): BelongsToMany
     {
         return $this->belongsToMany(Stack::class, 'project_stack');
-    }
-
-    protected static function booted(): void
-    {
-        static::creating(function ($project) {
-            // Сдвигаем все проекты, если порядок уже занят
-            Project::where('order', '>=', $project->order)->increment('order');
-        });
-
-        static::updating(function ($project) {
-            if ($project->isDirty('order')) {
-                $oldOrder = $project->getOriginal('order');
-                $newOrder = $project->order;
-
-                if ($newOrder < $oldOrder) {
-                    // Двигаем вниз те, кто между новым и старым
-                    Project::where('id', '!=', $project->id)
-                        ->whereBetween('order', [$newOrder, $oldOrder - 1])
-                        ->increment('order');
-                } elseif ($newOrder > $oldOrder) {
-                    // Двигаем вверх те, кто между старым и новым
-                    Project::where('id', '!=', $project->id)
-                        ->whereBetween('order', [$oldOrder + 1, $newOrder])
-                        ->decrement('order');
-                }
-            }
-        });
     }
 
     public function getStacks(): \Illuminate\Database\Eloquent\Collection

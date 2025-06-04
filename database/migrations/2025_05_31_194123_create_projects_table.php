@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->integer('order');
+            $table->dateTime('finish_project');
+            $table->string('github')->nullable();
+            $table->string('preview')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name

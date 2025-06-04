@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Project;
+use App\Models\Stack;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,8 +16,7 @@ class ProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        /** @var $this Project*/
-
+        /** @var $this Project */
         return [
             'id' => $this->getKey(),
             'title' => $this->getTitle(),
@@ -24,24 +24,28 @@ class ProjectResource extends JsonResource
             'description' => $this->getDescription(),
             'is_featured' => $this->getIsFeatured(),
             'order' => $this->getOrder(),
-            // Форматируем media для проекта
-            'media' => $this->getMedia('project')->map(function ($media) {
-                return [
-                    'id' => $media->id,
-                    'url' => $media->getUrl(),
-                ];
-            }),
+
+            'media' => $this->getMedia('project')
+                ->map(function ($media) {
+                    return [
+                        'id' => $media->getKey(),
+                        'url' => $media->getUrl(),
+                    ];
+                }),
+
+            /** @var $stack Stack */
 
             'stacks' => $this->stacks->map(function ($stack) {
                 return [
-                    'id' => $stack->id,
-                    'title' => $stack->title,
-                    'media' => $stack->getMedia('stack')->map(function ($media) {
-                        return [
-                            'id' => $media->id,
-                            'url' => $media->getUrl(),
-                        ];
-                    }),
+                    'id' => $stack->getKey(),
+                    'name' => $stack->getName(),
+                    'media' => $stack->getMedia('stack')
+                        ->map(function ($media) {
+                            return [
+                                'id' => $media->getKey(),
+                                'url' => $media->getUrl(),
+                            ];
+                        }),
                 ];
             }),
         ];

@@ -64,6 +64,12 @@ class ProjectResource extends Resource
                     ->relationship('stacks', 'name')
                     ->preload()
                     ->searchable(),
+                TextInput::make('github')
+                    ->label('Github'),
+                TextInput::make('preview')
+                    ->label('Пример'),
+                Forms\Components\DatePicker::make('finish_project')
+                    ->label('Когда проект был закончен'),
                 Select::make('order')
                     ->label('Порядок отображения')
                     ->options(function () {
@@ -95,7 +101,7 @@ class ProjectResource extends Resource
                     ->sortable(),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('image')
                     ->collection('project')
-                ->circular(),
+                    ->circular(),
             ])
             ->filters([
                 //

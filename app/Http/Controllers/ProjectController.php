@@ -21,9 +21,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project = Project::with(['media', 'stacks.media'])
+        $project->with(['media', 'stacks.media'])
             ->findOrFail($project->getKey());
-        return response()->json($project);
+        return new ProjectResource($project);
     }
 
 }
